@@ -89,12 +89,14 @@
       }
       loadingBar.style.display = "block";
 
+      var MyUnityInstance=null; 
       var script = document.createElement("script");
       script.src = loaderUrl;
       script.onload = () => {
         createUnityInstance(canvas, config, (progress) => {
           progressBarFull.style.width = 100 * progress + "%";
         }).then((unityInstance) => {
+            MyUnityInstance=unityInstance;//establish link
           loadingBar.style.display = "none";
           fullscreenButton.onclick = () => {
             unityInstance.SetFullscreen(1);
@@ -108,17 +110,15 @@
 
       function FromUnityToJs ()   // функция вызывается из Unity
       {
+          console.log("very good printed!!!");
             alert ("Very good!");
       }
 
-      var unityInstance = UnityLoader.instantiate("unityContainer", "Build/Lesson_build.json", {onProgress: UnityProgress}); // запуск unity на странице
+      
 
 
       jQuery(document).ready(function($) // страница прогружена
       {
-
-
-
       });
     </script>
   </body>
