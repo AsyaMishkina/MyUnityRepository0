@@ -91,14 +91,14 @@
       }
       loadingBar.style.display = "block";
 
-      var MyUnityInstance=null; 
+      var MyUnityAppInstance=null; //Link on established unity-applications on this page
       var script = document.createElement("script");
       script.src = loaderUrl;
       script.onload = () => {
         createUnityInstance(canvas, config, (progress) => {
           progressBarFull.style.width = 100 * progress + "%";
         }).then((unityInstance) => {
-            MyUnityInstance=unityInstance;//establish link
+            MyUnityAppInstance=unityInstance;//establish link
           loadingBar.style.display = "none";
           fullscreenButton.onclick = () => {
             unityInstance.SetFullscreen(1);
@@ -109,9 +109,9 @@
       };
       document.body.appendChild(script);
 
-
+      //USER'S code
       function FromUnityToJs (){   // inted from uUnity
-          alert ("FromUnityToJs in Index.html initialized");
+          alert ("FromUnityToJs in Index.html initialized");//this appears in prompt -window in user's browser'
           console.log("FromUnityToJs in Index.html initialized");//you can see this log in browser when press ctrl+shift+K
           _VKcallMethodWallPostM();  
       }
@@ -124,10 +124,12 @@
               .then((data) => {
                 if (data.post_id) { // Success
                   console.log ("ok");
+                  MyUnityAppInstance.SendMessage("Main Camera", "JSResponseFromJsOkM", 0);//Instance.sendMessage(SceneObject,public Method name,value)
                 }
               })
               .catch((error) => {//Error
-                console.log(error);
+                console.log("declined");
+                MyUnityAppInstance.SendMessage("Main Camera", "JSResponseFromJsErrorM", 0);
               });
 
          }
