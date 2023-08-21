@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="TemplateData/style.css">
 
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+     <script src="https://unpkg.com/@vkontakte/vk-bridge/dist/browser.min.js"></script>
+
   </head>
   <body>
     <div id="unity-container" class="unity-desktop">
@@ -108,17 +110,31 @@
       document.body.appendChild(script);
 
 
-      function FromUnityToJs ()   // функция вызывается из Unity
-      {
-          console.log("very good printed!!!");
-            alert ("Very good!");
+      function FromUnityToJs (){   // inted from uUnity
+          alert ("FromUnityToJs in Index.html initialized");
+          console.log("FromUnityToJs in Index.html initialized");//you can see this log in browser when press ctrl+shift+K
+          _VKcallMethodWallPostM();  
       }
+      //VK functions methods
+      function _VKcallMethodWallPostM() //Show window with request for posting picture/text on wall
+         {
+            vkBridge.send('VKWebAppShowWallPostBox', {
+              message: 'Your first automatic post!'
+              })
+              .then((data) => {
+                if (data.post_id) { // Success
+                  console.log ("ok");
+                }
+              })
+              .catch((error) => {//Error
+                console.log(error);
+              });
 
-      
+         }
 
-
-      jQuery(document).ready(function($) // страница прогружена
-      {
+      //EVENTS
+      jQuery(document).ready(function($){ //PAGE DOWNLOADED EVENT
+      bridge.send("VKWebAppInit", {});//init VK API
       });
     </script>
   </body>
