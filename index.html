@@ -110,7 +110,7 @@
       document.body.appendChild(script);
 
       //USER'S code
-      vkBridge.subscribe(("VKWebAppResizeWindow") => alert("subscribed event");
+      //vkBridge.subscribe(("VKWebAppResizeWindow") => alert("subscribed event");
 
       function FromUnityToJs (){   // inted from uUnity
           alert ("resize and show friends");//this appears in prompt -window in user's browser'
@@ -139,14 +139,13 @@
       alert("try friends");    
       vkBridge.send('VKWebAppGetFriends')
           .then((data) => { 
-            if (data) {
-              // Данные о пользователях
+            if (data) {//success
               alert("friends");
               console.log("Accepted!"+data.users);
             }
           })
           .catch((error) => {
-            // Ошибка
+            
             console.log(error);
           });
       }
