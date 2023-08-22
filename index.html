@@ -110,17 +110,16 @@
       document.body.appendChild(script);
 
       //USER'S code
-      //vkBridge.subscribe(("VKWebAppResizeWindow") => alert("subscribed event");
 
       function FromUnityToJs (){   // inted from uUnity
           alert ("resize and show friends");//this appears in prompt -window in user's browser'
           console.log("FromUnityToJs in Index.html initialized");//you can see this log in browser when press ctrl+shift+K
           _VKResizeAppWindowIfSupportsM(;)
-          _VKShowFriendsM();
+          //_VKShowFriendsM();
           //_VKcallMethodWallPostM();  
       }
       //vkBridge functions methods
-      function _VKcallMethodWallPostM(){ //Show window with request for posting picture/text on wall
+      //function _VKcallMethodWallPostM(){ //Show window with request for posting picture/text on wall
           vkBridge.send('VKWebAppShowWallPostBox', {
               message: 'Your first automatic post!'
               })
@@ -134,21 +133,21 @@
                 console.log("declined");
                 MyUnityAppInstance.SendMessage("Main Camera", "JSResponseFromJsErrorM", 0);
               });
-         }
-      function _VKShowFriendsM(){//show list of friends
-      alert("try friends");    
-      vkBridge.send('VKWebAppGetFriends')
-          .then((data) => { 
-            if (data) {//success
-              alert("friends");
-              console.log("Accepted!"+data.users);
-            }
-          })
-          .catch((error) => {
+      //   }
+     // function _VKShowFriendsM(){//show list of friends
+     // alert("try friends");    
+     //// vkBridge.send('VKWebAppGetFriends')
+      ///    .then((data) => { 
+       //     if (data) {//success
+        //      alert("friends");
+       //       console.log("Accepted!"+data.users);
+      //      }
+     //     })
+     //     .catch((error) => {
             
-            console.log(error);
-          });
-      }
+       //     console.log(error);
+       //   });
+     // }
       function _VKResizeAppWindowIfSupportsM(){
           if (vkBridge.supports("VKWebAppResizeWindow")) {//if supported
                 vkBridge.send("VKWebAppResizeWindow", {"width": 800, "height": 1000});//resize
