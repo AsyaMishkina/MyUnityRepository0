@@ -135,12 +135,12 @@
 
          }
       function _VKShowFriendsM(){
-          bridge.send('VKWebAppGetFriends')
+      alert("try friends");    
+      vkBridge.send('VKWebAppGetFriends')
           .then((data) => { 
             if (data) {
               // Данные о пользователях
               alert("friends");
-              https://vk.com/app6909581#VktXZWJBcHBHZXRGcmllbmRzQCU3QiUyMm11bHRpJTIyJTNBdHJ1ZSU3RA==
               console.log("Accepted!"+data.users);
             }
           })
