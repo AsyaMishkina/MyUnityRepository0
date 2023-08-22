@@ -116,7 +116,7 @@
       function FromUnityToJs (){   // inted from uUnity
           alert ("resize try to close");//this appears in prompt -window in user's browser'
          if (vkBridge.supports("VKWebAppResizeWindow")) {//if this is supported by current platform
-            vk.Bridge.send("VKWebAppResizeWindow", {"width": 200, "height": 1000});//initialize method
+            vkBridge.send("VKWebAppResizeWindow", {"width": 200, "height": 1000});//initialize method
          }
           console.log("FromUnityToJs in Index.html initialized");//you can see this log in browser when press ctrl+shift+K
          _VKcallMethodWallPostM(); //init method 
