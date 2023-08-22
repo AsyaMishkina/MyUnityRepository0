@@ -9,7 +9,7 @@
 
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
      <script src="https://unpkg.com/@vkontakte/vk-bridge/dist/browser.min.js"></script>
-     "Asya VK Lesson: event";
+     "Asya VK Lesson: resize windiow";
   </head>
   <body>
     <div id="unity-container" class="unity-desktop">
@@ -112,14 +112,12 @@
 
       
       //USER'S code
- bridge.subscribe((e) => console.log("Event e initialized"));//subscribe to event e
- bridge.subscribe((e) => alert("event e");
       
       function FromUnityToJs (){   // inted from uUnity
-          alert ("event");//this appears in prompt -window in user's browser'
-         if (bridge.supports("VKWebAppResizeWindow")) {//this is supported by current platform
+          alert ("resize");//this appears in prompt -window in user's browser'
+         if (bridge.supports("VKWebAppResizeWindow")) {//if this is supported by current platform
             bridge.send("VKWebAppResizeWindow", {"width": 800, "height": 1000});//initialize method
-        }
+         }
           console.log("FromUnityToJs in Index.html initialized");//you can see this log in browser when press ctrl+shift+K
          // _VKcallMethodWallPostM(); //init method 
           
