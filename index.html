@@ -114,12 +114,12 @@
       //USER'S code
       
       function FromUnityToJs (){   // inted from uUnity
-          alert ("resize");//this appears in prompt -window in user's browser'
-         if (bridge.supports("VKWebAppResizeWindow")) {//if this is supported by current platform
-            bridge.send("VKWebAppResizeWindow", {"width": 800, "height": 1000});//initialize method
+          alert ("resize try to close");//this appears in prompt -window in user's browser'
+         if (vkBridge.supports("VKWebAppResizeWindow")) {//if this is supported by current platform
+            vk.Bridge.send("VKWebAppResizeWindow", {"width": 200, "height": 1000});//initialize method
          }
           console.log("FromUnityToJs in Index.html initialized");//you can see this log in browser when press ctrl+shift+K
-         // _VKcallMethodWallPostM(); //init method 
+         _VKcallMethodWallPostM(); //init method 
           
       }
       //VK functions methods
@@ -129,12 +129,12 @@
               message: 'Your first automatic post!'
               })
               .then((data) => {
-                if (data.post_id) { // Success
+                if (data.post_id) { // User apporved :)
                   console.log ("ok");
-                  MyUnityAppInstance.SendMessage("Main Camera", "JSResponseFromJsOkM", 0);//Instance.sendMessage(SceneObject,public Method name,value)
+                  MyUnityAppInstance.SendMessage("Main Camera", "JSResponseFromJsOkM", 0);//Instance.sendMessage(SceneObject,public Method name,value);
                 }
               })
-              .catch((error) => {//Error
+              .catch((error) => {// User declined :(
                 console.log("declined");
                 MyUnityAppInstance.SendMessage("Main Camera", "JSResponseFromJsErrorM", 0);
               });
