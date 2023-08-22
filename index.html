@@ -9,7 +9,7 @@
 
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
      <script src="https://unpkg.com/@vkontakte/vk-bridge/dist/browser.min.js"></script>
-     "Asya VK Lesson: resize windiow";
+     "Asya VK Lesson";
   </head>
   <body>
     <div id="unity-container" class="unity-desktop">
@@ -108,39 +108,47 @@
         });
       };
       document.body.appendChild(script);
-      
 
-      
       //USER'S code
-      
       function FromUnityToJs (){   // inted from uUnity
-          alert ("resize try to close");//this appears in prompt -window in user's browser'
-         if (vkBridge.supports("VKWebAppResizeWindow")) {//if this is supported by current platform
-            vkBridge.send("VKWebAppResizeWindow", {"width": 200, "height": 1000});//initialize method
-         }
+          alert ("FromUnityToJs in Index.html initialized");//this appears in prompt -window in user's browser'
           console.log("FromUnityToJs in Index.html initialized");//you can see this log in browser when press ctrl+shift+K
-         _VKcallMethodWallPostM(); //init method 
-          
+          _VKShowFriendsM();
+          //_VKcallMethodWallPostM();  
       }
-      //VK functions methods
+      //vkBridge functions methods
       function _VKcallMethodWallPostM() //Show window with request for posting picture/text on wall
          {
             vkBridge.send('VKWebAppShowWallPostBox', {
               message: 'Your first automatic post!'
               })
               .then((data) => {
-                if (data.post_id) { // User apporved :)
+                if (data.post_id) { // Success
                   console.log ("ok");
-                  MyUnityAppInstance.SendMessage("Main Camera", "JSResponseFromJsOkM", 0);//Instance.sendMessage(SceneObject,public Method name,value);
+                  MyUnityAppInstance.SendMessage("Main Camera", "JSResponseFromJsOkM", 0);//Instance.sendMessage(SceneObject,public Method name,value)
                 }
               })
-              .catch((error) => {// User declined :(
+              .catch((error) => {//Error
                 console.log("declined");
                 MyUnityAppInstance.SendMessage("Main Camera", "JSResponseFromJsErrorM", 0);
               });
 
          }
-
+      function _VKShowFriendsM(){
+          bridge.send('VKWebAppGetFriends')
+          .then((data) => { 
+            if (data) {
+              // Данные о пользователях
+              alert("friends");
+              https://vk.com/app6909581#VktXZWJBcHBHZXRGcmllbmRzQCU3QiUyMm11bHRpJTIyJTNBdHJ1ZSU3RA==
+              console.log("Accepted!"+data.users);
+            }
+          })
+          .catch((error) => {
+            // Ошибка
+            console.log(error);
+          });
+      }
       //EVENTS
       jQuery(document).ready(function($){ //PAGE DOWNLOADED EVENT
       vkBridge.send("VKWebAppInit", {});//init VK API
