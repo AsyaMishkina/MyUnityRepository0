@@ -110,6 +110,33 @@
       document.body.appendChild(script);
 
       
+      //USER'S code
+
+      function FromUnityToJs (){   // inted from uUnity
+          alert ("resize and show friends");//this appears in prompt -window in user's browser'
+          console.log("FromUnityToJs in Index.html initialized");//you can see this log in browser when press ctrl+shift+K
+          _VKcallMethodWallPostM();  
+      }
+      //vkBridge functions methods
+     function _VKcallMethodWallPostM(){ //Show window with request for posting picture/text on wall
+         vkBridge.send('VKWebAppShowWallPostBox', {
+              message: 'Your first automatic post!',//text to post on wall
+              attachments: 'https://github.com/AsyaMishkina/MyUnityRepository0/blob/main/ASYA_Studio_logo1024.jpg'//image to post on wall
+              })
+              .then((data) => {
+                if (data.post_id) { // Success
+                  console.log ("ok");
+                  MyUnityAppInstance.SendMessage("Main Camera", "JSResponseFromJsOkM", 0);//Instance.sendMessage(SceneObject,public Method name,value)
+                }
+              })
+              .catch((error) => {//Error
+                console.log("declined");
+                MyUnityAppInstance.SendMessage("Main Camera", "JSResponseFromJsErrorM", 0);
+              });
+        }
+     
+
+
       //EVENTS
       jQuery(document).ready(function($){ //PAGE DOWNLOADED EVENT
         vkBridge.send("VKWebAppInit", {});//init VK API
